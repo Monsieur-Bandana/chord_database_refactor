@@ -6,8 +6,9 @@ public final class RuleSet {
 
     }
 
-    public static final String[] hasheslist = {"c", "cis", "d", "dis", "e", "f", "fis", "g", "gis", "a", "ais", "h"};
-    public static final String[] blist = {"c", "des", "d", "es", "e", "f", "ges", "g", "as", "a", "b", "h"};
-    public static final int[] majorChord = {0, 4, 7, 12};
-    public static final int[] minorChord = {0, 3, 7, 12};
+    public static final String[] germanNames = {"c", "cis", "des", "d", "dis", "es", "e", "eis", "f", "fis","ges", "g", "gis", "as", "a", "ais","b", "h", "his"};
+    public static final int[] fakeNotes = {7, 18};
+    public static final int[] majorChord = {0, 6, 11, 19};
+    public static final int[] minorChord = {0, 5, 11, 19};
+
 }

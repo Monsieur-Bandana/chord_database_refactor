@@ -1,0 +1,30 @@
+.piano-surround {
+  margin-top: 0.5rem;
+  width: 35rem;
+}
+
+.black {
+  height: 12.5rem;
+  width: 1.3rem;
+}
+
+a:nth-child(2) .black,
+a:nth-child(5) .black,
+a:nth-child(9) .black,
+a:nth-child(12) .black,
+a:nth-child(15) .black {
+  margin-left: -1.3rem;
+}
+
+.white {
+  height: 15rem;
+  width: 5rem;
+}
+
+.white h1 {
+  padding-top: 12.5rem;
+}
+
+.black h1 {
+  padding-top: 2rem;
+}

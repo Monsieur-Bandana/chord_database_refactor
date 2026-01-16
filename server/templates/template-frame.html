@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Akkorde mit $basetone$</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="headercontent">
+        <div class="button">
+          <a href="/">Notenauswahl</a>
+        </div>
+        <div class="button">
+          <a href="/completelist">komplette Übersicht</a>
+        </div>
+        <div class="button">
+          <a href="/aboutme">About</a>
+        </div>
+      </div>
+    </header>
+
+    <div id="circle"></div>
+
+    <main>
+      <div class="jumppoints">
+        <p><span class="uppercase">$basetone$</span> als Grundton:</p>
+        <div class="jInner">$jumperElementsChord$</div>
+
+        <p>
+          Andere Akkorde, die ein
+          <span class="uppercase">$basetone$</span> enthalten:
+        </p>
+        <div class="jInner">$jumperElementsRelated$</div>
+      </div>
+      <h2><span class="uppercase">$basetone$</span> als Grundton</h2>
+      $pianoElementsBasetone$
+      <h2 id="newSection">
+        Andere Akkorde, die ein <span class="uppercase">$basetone$</span> enthalten:
+      </h2>
+      $pianoElementsRelated$
+      
+
+    <footer>
+      <a href="/dsgvo">DSGVO</a>
+    </footer>
+  </body>
+</html>

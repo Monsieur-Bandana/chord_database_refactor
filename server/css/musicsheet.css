@@ -1,0 +1,127 @@
+.basement {
+  background-color: #cfccec;
+  padding: 0.5rem 1.5rem;
+  margin: 4rem auto 0 auto;
+  border-radius: 4px;
+  width: 70%;
+  display: none;
+}
+
+.aussen {
+  margin-top: 1.4rem;
+  margin-bottom: 3.5rem;
+  width: 100%;
+  border: 1px solid black;
+  height: 5rem;
+}
+
+.innen {
+  margin-top: 1.22rem;
+  width: 100%;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 2.5rem;
+}
+.ganzInnen {
+  width: 100%;
+  border-top: 1px solid black;
+  margin-top: 1.2rem;
+}
+
+.notenBereich {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1rem;
+}
+
+.note {
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.note:hover {
+  background-color: #64698b;
+}
+
+.noteInnen {
+  width: 0.6rem;
+  height: 1rem;
+  background-color: #cfccec;
+  border-radius: 40% 100%;
+  margin: 0.1rem 0.32rem;
+}
+
+.strich {
+  width: 2.2rem;
+  border-top: 1px solid black;
+  margin-top: 0.6rem;
+  margin-left: -0.5rem;
+  position: absolute;
+  z-index: 2;
+}
+
+.notenSchluessel {
+  width: 2.75rem;
+  margin-top: -4rem;
+  margin-right: 2rem;
+}
+
+.noteAussen {
+  margin-right: 1rem;
+}
+
+.flexnote {
+  display: flex;
+  flex-direction: row;
+}
+
+.vorzeichen {
+  color: black;
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin-top: -0.4rem;
+  margin-right: 0.5rem;
+}
+
+#c {
+  margin-top: 3.3rem;
+}
+
+#cis {
+  margin-top: 3.3rem;
+}
+
+#d,
+#dis,
+#des {
+  margin-top: 2.5rem;
+}
+
+#e,
+#es {
+  margin-top: 1.85rem;
+}
+
+#f,
+#fis {
+  margin-top: 1.3rem;
+}
+
+#g,
+#gis,
+#ges {
+  margin-top: 0.65rem;
+}
+
+#a,
+#ais,
+#as {
+  margin-top: 0rem;
+}
+
+#h,
+#b {
+  margin-top: -0.65rem;
+}

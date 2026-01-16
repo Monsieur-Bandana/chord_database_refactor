@@ -1,0 +1,7 @@
+variables
+
+basetone: replaces title name
+chordname: basetone + harmony replces title name too
+jumperElementsChord: sidmenu, generated through html template
+jumperElementsRelated: sidmenu, generated through html template
+coloring(c:white): function to color the piano keys, white, black (default) or red

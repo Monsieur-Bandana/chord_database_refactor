@@ -9,18 +9,28 @@ public class ChordCreator {
     private String startingTone;
     private String chordType;
     private String[] ladder;
+
     public ChordCreator(String startingTone, String chordType) {
         this.startingTone = startingTone;
         this.chordType = chordType;
         ladder = Stream.concat(
-                Arrays.stream(RuleSet.hasheslist),
-                Arrays.stream(RuleSet.hasheslist)
+                Arrays.stream(RuleSet.germanNames),
+                Arrays.stream(RuleSet.germanNames)
         ).toArray(String[]::new);
     }
 
+    private int replaceFakeNotes(int n){
+        for (int i = 0; i < RuleSet.fakeNotes.length; i++){
+            int fakeVal = RuleSet.fakeNotes[i];
+            if(fakeVal == n || fakeVal + ladder.length -1 == n){
+                n++;
+            }
+        }
 
+        return n;
+    }
 
-    public List<String> getChord() throws Exception {
+    public Chord getChord() throws Exception {
         int[] mChords = {};
         switch (chordType){
             case "major":
@@ -45,8 +55,12 @@ public class ChordCreator {
 
         for(int i = 0; i< mChords.length; i++){
             int ladder_pos = mChords[i] + additioner;
+        //    ladder_pos = this.replaceFakeNotes(ladder_pos);
             retChord.add(ladder[ladder_pos]);
         }
-        return retChord;
+
+        Chord chorc = new Chord(retChord.get(0), retChord.get(1), retChord.get(2), retChord.get(3), chordType);
+
+        return chorc;
     }
 }
