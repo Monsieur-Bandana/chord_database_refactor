@@ -20,5 +20,11 @@ public class Main {
             Chord chord = test.get(i);
             System.out.println(chord.baseTone + "-" + chord.harmony +" -> "+chord.baseTone+","+chord.scdTone+","+chord.thirdTone+","+chord.highPitchBaseTone);
         }
+
+        List<String> scaleTest = new LegalScale("german").getScale();
+
+        for (int i = 0; i < scaleTest.toArray().length; i++){
+            System.out.printf(" " + scaleTest.get(i) +" ");
+        }
     }
 }
