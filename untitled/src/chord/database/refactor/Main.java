@@ -1,6 +1,5 @@
 package chord.database.refactor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
@@ -24,7 +23,9 @@ public class Main {
         List<String> scaleTest = new LegalScale("german").getScale();
 
         for (int i = 0; i < scaleTest.toArray().length; i++){
-            System.out.printf(" " + scaleTest.get(i) +" ");
+            String baseTone = scaleTest.get(i);
+            System.out.printf(" " + baseTone +" ");
+            new HTMLGenerator(baseTone, test).generatePage();
         }
     }
 }
