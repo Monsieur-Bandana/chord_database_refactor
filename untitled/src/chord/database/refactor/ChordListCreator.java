@@ -9,19 +9,7 @@ public class ChordListCreator {
     private String languageSetting;
     public ChordListCreator(String languageSetting) throws Exception {
         this.languageSetting = languageSetting;
-        switch (languageSetting){
-            case "german":
-                ladder = RuleSet.germanNames;
-                break;
-            case "roman":
-                ladder = RuleSet.romanNames;
-                break;
-            case "english":
-                ladder = RuleSet.englishNames;
-                break;
-            default:
-                throw new Exception("Unbekannte Sprache: " + languageSetting);
-        }
+        this.ladder = new LanguageHelper(languageSetting).getBasicLadder();
 
         forbiddenTones = setForbiddenTones();
     }

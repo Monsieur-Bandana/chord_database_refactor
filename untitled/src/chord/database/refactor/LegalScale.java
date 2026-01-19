@@ -6,26 +6,14 @@ import java.util.List;
 
 public class LegalScale {
     private String[] ladder;
-    private String languageSetting;
+    private LanguageHelper languageHelper;
     public LegalScale(String languageSetting) throws Exception {
-        this.languageSetting = languageSetting;
+        this.languageHelper = new LanguageHelper(languageSetting);
 
     }
 
     public List<String> getScale() throws Exception{
-        switch (languageSetting){
-            case "german":
-                ladder = RuleSet.germanNames;
-                break;
-            case "english":
-                ladder = RuleSet.englishNames;
-                break;
-            case "roman":
-                ladder = RuleSet.romanNames;
-                break;
-            default:
-                throw new Exception("Unbekannte Sprache: " + languageSetting);
-        }
+        ladder = languageHelper.getBasicLadder();
 
 
 

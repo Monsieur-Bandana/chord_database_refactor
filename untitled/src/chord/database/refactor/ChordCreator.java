@@ -10,29 +10,14 @@ public class ChordCreator {
     private String chordType;
     private String[] ladder;
     private String language;
+    private LanguageHelper languageHelper;
 
-    public ChordCreator(String startingTone, String chordType, String language) {
+    public ChordCreator(String startingTone, String chordType, String language) throws Exception {
         this.startingTone = startingTone;
         this.chordType = chordType;
         this.language = language;
-        String[] ladderhelper;
-        switch (language){
-            case "german":
-                ladderhelper = RuleSet.germanNames;
-                break;
-            case "english":
-                ladderhelper = RuleSet.englishNames;
-                break;
-            case "roman":
-                ladderhelper = RuleSet.romanNames;
-                break;
-            default:
-                throw new Exception("Unbekannte Sprache: " + language);
-        }
-        this.ladder = Stream.concat(
-                Arrays.stream(ladderhelper),
-                Arrays.stream(ladderhelper)
-        ).toArray(String[]::new);
+        this.languageHelper = new LanguageHelper(language);
+        this.ladder = languageHelper.getLongLadder();
     }
 
     private int replaceFakeNotes(int n){
@@ -48,7 +33,7 @@ public class ChordCreator {
 
     public Chord getChord() throws Exception {
         Harmony harmony;
-        String chordname;
+
         int[] mChords = {};
         switch (chordType){
             case "major":
@@ -60,19 +45,7 @@ public class ChordCreator {
             default:
                 throw new Exception("Unbekannter chordType: " + chordType);
         }
-        switch (language){
-            case "german":
-                chordname = harmony.german;
-                break;
-            case "english":
-                chordname = harmony.english;
-                break;
-            case "roman":
-                chordname = harmony.roman;
-                break;
-            default:
-                throw new Exception("Unbekannter Sproch: " + language);
-        }
+        String chordname = languageHelper.getChordName(harmony);
 
         mChords = harmony.chord;
         int additioner = 0;

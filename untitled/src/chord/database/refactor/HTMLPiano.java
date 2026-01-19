@@ -12,33 +12,17 @@ public class HTMLPiano {
     private final Path templatePiano;
     private Chord chord;
     private String[] ladder;
+    private LanguageHelper languageHelper;
 
     public HTMLPiano(Chord chord, String language) throws Exception {
         this.chord = chord;
         this.templatePiano = Path.of("server/templates/template-piano.html");
-        String[] ladderhelper;
-        switch (language){
-            case "german":
-                ladderhelper = RuleSet.germanNames;
-                break;
-            case "english":
-                ladderhelper = RuleSet.englishNames;
-                break;
-            case "roman":
-                ladderhelper = RuleSet.romanNames;
-                break;
-            default:
-                throw new Exception("Unbekannte Sprache: " + language);
-        }
-        this.ladder = Stream.concat(
-                Arrays.stream(ladderhelper),
-                Arrays.stream(ladderhelper)
-        ).toArray(String[]::new);
-
-
+        this.languageHelper = new LanguageHelper(language);
+        this.ladder = languageHelper.getLongLadder();
     }
 
     public String generatePage() throws IOException {
+        String server = languageHelper.getServer();
 
         // Template lesen
         String htmlString = Files.readString(templatePiano);
@@ -46,6 +30,7 @@ public class HTMLPiano {
         // Platzhalter ersetzen
         htmlString = htmlString.replace("$chordname$", chord.chordname);
         htmlString = htmlString.replace("$audiofilename$", chord.baseTone.toUpperCase()+"-"+chord.harmonyH.german);
+        htmlString = htmlString.replace("$language$", server);
 
         Pattern pattern = Pattern.compile("\\$(\\d+)\\$");
         Matcher matcher = pattern.matcher(htmlString);
