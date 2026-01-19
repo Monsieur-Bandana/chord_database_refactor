@@ -26,7 +26,7 @@ public class SpecificChordList {
     public List<Chord> getRelatedToneList(){
         List<Chord> retChord = new ArrayList<>();
         for (Chord chord : allChords){
-            if(Arrays.asList(chord.tones).contains(baseTone)){
+            if(Arrays.asList(chord.tones).contains(baseTone)  && !Arrays.asList(chord.tones).get(0).equals(baseTone)){
                 retChord.add(chord);
             }
         }

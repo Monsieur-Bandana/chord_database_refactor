@@ -6,11 +6,18 @@ import java.util.List;
 public class ChordListCreator {
     private String[] ladder;
     private List<String> forbiddenTones;
+    private String languageSetting;
     public ChordListCreator(String languageSetting) throws Exception {
-
+        this.languageSetting = languageSetting;
         switch (languageSetting){
             case "german":
                 ladder = RuleSet.germanNames;
+                break;
+            case "roman":
+                ladder = RuleSet.romanNames;
+                break;
+            case "english":
+                ladder = RuleSet.englishNames;
                 break;
             default:
                 throw new Exception("Unbekannte Sprache: " + languageSetting);
@@ -50,8 +57,8 @@ public class ChordListCreator {
             if(forbiddenTones.contains(ladder[i])){
                 continue;
             };
-            Chord mjaorChord = new ChordCreator(ladder[i], "major").getChord();
-            Chord minorChord = new ChordCreator(ladder[i], "minor").getChord();
+            Chord mjaorChord = new ChordCreator(ladder[i], "major", languageSetting).getChord();
+            Chord minorChord = new ChordCreator(ladder[i], "minor", languageSetting).getChord();
             if (isValid(mjaorChord)) {
                 retList.add(mjaorChord);
             }

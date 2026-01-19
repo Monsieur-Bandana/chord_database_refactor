@@ -17,6 +17,12 @@ public class LegalScale {
             case "german":
                 ladder = RuleSet.germanNames;
                 break;
+            case "english":
+                ladder = RuleSet.englishNames;
+                break;
+            case "roman":
+                ladder = RuleSet.romanNames;
+                break;
             default:
                 throw new Exception("Unbekannte Sprache: " + languageSetting);
         }

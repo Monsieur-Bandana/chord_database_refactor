@@ -7,43 +7,70 @@ import java.util.List;
 
 public class HTMLGenerator {
 
-    private final String baseTone;
-    private final Path templateFrame;
-    private final Path destPath;
-    private List<Chord> mainChords;
-    private List<Chord> relatedChords;
+    private String language;
+    private List<Chord> allChords;
+    private String server;
 
-    public HTMLGenerator(String baseTone, List<Chord> chords) {
-        SpecificChordList chordlist = new SpecificChordList(baseTone, chords);
-        this.baseTone = baseTone;
-        this.templateFrame = Path.of("server/templates/template-frame.html");
-        this.destPath = Path.of("server", baseTone, "index.html");
-        this.mainChords = chordlist.getBaseToneList();
-        this.relatedChords = chordlist.getRelatedToneList();
+    public HTMLGenerator(List<Chord> chords, String language) {
+        this.allChords = chords;
+        this.language = language;
+        String serverAddOn = "";
+        if(!language.equals("german")){
+            serverAddOn = "/" + language;
+        }
+        this.server = "server" + serverAddOn;
     }
 
-    private String generatePiano(List<Chord> chords) throws IOException {
+    private String generatePianos(List<Chord> chords) throws Exception {
         String pianoSection = "";
         for(Chord chord : chords){
-            pianoSection += new HTMLPiano(chord).generatePage();
+            pianoSection += new HTMLPiano(chord, language).generatePage();
         }
         return pianoSection;
     }
 
-    public void generatePage() throws IOException {
+    private String generateMenu(List<Chord> chords) throws IOException {
+        String menuSection = "";
+        for(Chord chord : chords){
+            menuSection += new HTMLMenu(chord).generateEl();
+        }
+        return menuSection;
+    }
 
+    public void generateSinglePage(String baseTone) throws Exception {
+        Path templateFrame = Path.of("server/templates/template-frame.html");
+        Path destPath = Path.of(server, baseTone, "index.html");
+        SpecificChordList chordlist = new SpecificChordList(baseTone, allChords);
+        List<Chord> mainChords = chordlist.getBaseToneList();
+        List<Chord> relatedChords = chordlist.getRelatedToneList();
         // Template lesen
         String htmlString = Files.readString(templateFrame);
 
         // Platzhalter ersetzen
         htmlString = htmlString.replace("$basetone$", baseTone);
-        htmlString = htmlString.replace("$pianoElementsBasetone$", this.generatePiano(mainChords));
-        htmlString = htmlString.replace("$pianoElementsRelated$", this.generatePiano(relatedChords));
+        htmlString = htmlString.replace("$pianoElementsBasetone$", this.generatePianos(mainChords));
+        htmlString = htmlString.replace("$pianoElementsRelated$", this.generatePianos(relatedChords));
+        htmlString = htmlString.replace("$jumperElementsChord$", this.generateMenu(mainChords));
+        htmlString = htmlString.replace("$jumperElementsRelated$", this.generateMenu(relatedChords));
 
         // Zielordner anlegen (falls nicht vorhanden)
         Files.createDirectories(destPath.getParent());
 
         // Datei schreiben
         Files.writeString(destPath, htmlString);
+    }
+
+    public void generateCompleteList() throws Exception {
+        Path completedtemplate = Path.of("server/templates/template-frame-all.html");
+        Path dest = Path.of(server, "completelist","index.html");
+        String htmlString = Files.readString(completedtemplate);
+        htmlString = htmlString.replace("$jumperElements$", this.generateMenu(allChords));
+        htmlString = htmlString.replace("$pianoElements$", this.generatePianos(allChords));
+
+        // Zielordner anlegen (falls nicht vorhanden)
+        Files.createDirectories(dest.getParent());
+
+        // Datei schreiben
+        Files.writeString(dest, htmlString);
     }
 }
