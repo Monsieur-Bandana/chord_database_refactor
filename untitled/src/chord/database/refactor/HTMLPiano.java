@@ -1,13 +1,7 @@
 package chord.database.refactor;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class HTMLPiano {
 
@@ -52,5 +46,34 @@ public class HTMLPiano {
         }
 
         return pianoString;
+    }
+
+    public String buildChordPiano(Chord chord) throws IOException {
+        String htmlString = TemplateHelper.extractString("template-piano");
+        String pianoString = "";
+        for (int i =0; i < ladder.length; i++){
+            String color = "black";
+            int finalI = i;
+            if(Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n == finalI) || Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n + 19 == finalI) ){
+                continue;
+            }
+            int helper = i;
+            if(helper >= 19){
+                helper-=19;
+            }
+            if(helper >= 8){
+                helper-=8;
+            }
+            if(helper % 3 == 0){
+                color = "white";
+            }
+            if(Arrays.stream(chord.numericTones).anyMatch(n -> n == finalI)){
+                color += " red";
+            }
+            pianoString += this.generatKey(ladder[i], color);
+        }
+        htmlString = htmlString.replace("$pianokeys$", pianoString);
+        htmlString = htmlString.replace("$chordname$", chord.chordname);
+        return htmlString;
     }
 }

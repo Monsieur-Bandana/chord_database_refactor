@@ -367,6 +367,19 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+.language-menu {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 0.9rem;
+}
+
+.language-menu img {
+  width: 1.2rem;
+  height: auto;
+  vertical-align: middle;
+}
+
 @media (prefers-color-scheme: dark) {
   .white {
     background-color: #cfccec;

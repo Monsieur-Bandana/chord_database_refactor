@@ -38,7 +38,7 @@ public class HTMLGenerator {
         String[] ladder = languageHelper.getLongLadder();
         String pianoSection = "";
         for(Chord chord : chords){
-            pianoSection += new HTMLPianoChord(chord, language, ladder).generatePage();
+            pianoSection += new HTMLPiano(language, ladder).buildChordPiano(chord);
         }
         return pianoSection;
     }
@@ -51,6 +51,19 @@ public class HTMLGenerator {
         return menuSection;
     }
 
+    public String generateText(String htmlString, String key){
+        htmlString = htmlString.replace("$"+key+"$", languageHelper.getTranslation(key));
+        return htmlString;
+    }
+
+    public String translateMultipleKeys(String htmlString, String[] textKeys){
+
+        for (String el : textKeys){
+            htmlString = generateText(htmlString, el);
+        }
+        return htmlString;
+    }
+
     public void generateSinglePage(String baseTone) throws Exception {
         Path templateFrame = Path.of("server/templates/template-frame.html");
         Path destPath = Path.of(server, baseTone, "index.html");
@@ -61,12 +74,16 @@ public class HTMLGenerator {
         String htmlString = Files.readString(templateFrame);
 
         // Platzhalter ersetzen
-        htmlString = htmlString.replace("$header$", this.generateHeader());
+        htmlString = HTMLDecorator(htmlString);
         htmlString = htmlString.replace("$basetone$", baseTone);
         htmlString = htmlString.replace("$pianoElementsBasetone$", this.generatePianos(mainChords));
         htmlString = htmlString.replace("$pianoElementsRelated$", this.generatePianos(relatedChords));
         htmlString = htmlString.replace("$jumperElementsChord$", this.generateMenu(mainChords));
         htmlString = htmlString.replace("$jumperElementsRelated$", this.generateMenu(relatedChords));
+
+        String[] textKeys = {"chordswith", "asbase", "othercords"};
+        htmlString = translateMultipleKeys(htmlString, textKeys);
+
 
         // Zielordner anlegen (falls nicht vorhanden)
         Files.createDirectories(destPath.getParent());
@@ -77,12 +94,13 @@ public class HTMLGenerator {
 
     public void generateCompleteList() throws Exception {
         Path completedtemplate = Path.of("server/templates/template-frame-all.html");
-        Path dest = Path.of(server, "completelist","index.html");
+
         String htmlString = Files.readString(completedtemplate);
         htmlString = htmlString.replace("$jumperElements$", this.generateMenu(allChords));
         htmlString = htmlString.replace("$pianoElements$", this.generatePianos(allChords));
-        htmlString = htmlString.replace("$header$", this.generateHeader());
+        htmlString = HTMLDecorator(htmlString);
 
+        Path dest = Path.of(server, "completelist","index.html");
         // Zielordner anlegen (falls nicht vorhanden)
         Files.createDirectories(dest.getParent());
 
@@ -99,10 +117,12 @@ public class HTMLGenerator {
         String htmlPiano = new HTMLPiano(language, ladder).buildPiano();
 
         htmlString = htmlString.replace("$keyset$", htmlPiano);
-        htmlString = htmlString.replace("$header$",  this.generateHeader());
+        htmlString = HTMLDecorator(htmlString);
         htmlString = htmlString.replace("$server$",  languageHelper.getServer());
         htmlString = TemplateHelper.replaceInts(htmlString, ladder);
-        htmlString = htmlString.replace("$instruction$",  languageHelper.getTranslation("instruction"));
+
+        String[] textKeys = {"instruction", "welcome", "title", "todatabase", "target", "explanation"};
+        htmlString = translateMultipleKeys(htmlString, textKeys);
 
         Path dest = Path.of(server, "index.html");
         // Zielordner anlegen (falls nicht vorhanden)
@@ -110,5 +130,41 @@ public class HTMLGenerator {
 
         // Datei schreiben
         Files.writeString(dest, htmlString);
+    }
+
+    public void generateAboutPage() throws Exception{
+        String htmlString = TemplateHelper.extractString("template-about");
+        htmlString = HTMLDecorator(htmlString);
+
+        Path dest = Path.of(server, "aboutme","index.html");
+        // Zielordner anlegen (falls nicht vorhanden)
+        Files.createDirectories(dest.getParent());
+
+        // Datei schreiben
+        Files.writeString(dest, htmlString);
+    }
+
+    public void generateDSGVO() throws Exception{
+        String htmlString = TemplateHelper.extractString("template-dsgvo");
+        htmlString = HTMLDecorator(htmlString);
+
+        Path dest = Path.of(server, "dsgvo","index.html");
+        // Zielordner anlegen (falls nicht vorhanden)
+        Files.createDirectories(dest.getParent());
+
+        // Datei schreiben
+        Files.writeString(dest, htmlString);
+    }
+
+    public String generateFooter(){
+        return "<a href=\"/"+server+"dsgvo\">DSGVO</a>";
+
+    }
+
+    public String HTMLDecorator(String htmlString) throws IOException {
+        htmlString = htmlString.replace("$header$",  this.generateHeader());
+        htmlString = htmlString.replace("$header$",  this.generateHeader());
+        htmlString = htmlString.replace("$footer$", this.generateFooter());
+        return htmlString;
     }
 }

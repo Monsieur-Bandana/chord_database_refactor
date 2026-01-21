@@ -1,0 +1,15 @@
+<div>
+  <a href="#$chordname$" id="$chordname$link">$chordname$</a>
+</div>
+<script>
+  var el = document.getElementById("$chordname$link");
+  el.onclick = showFoo;
+
+  function showFoo() {
+    var elements = document.getElementsByClassName("yellow");
+    for (var i = 0, len = elements.length; i < len; i++) {
+      elements[i].classList.remove("yellow");
+    }
+    document.getElementById("$chordname$").classList.add("yellow");
+  }
+</script>

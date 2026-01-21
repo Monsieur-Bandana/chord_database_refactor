@@ -1,6 +1,9 @@
 package chord.database.refactor;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class RuleSet {
     private RuleSet(){
 
@@ -12,5 +15,6 @@ public final class RuleSet {
     public static final int[] fakeNotes = {7, 18};
     public static final Harmony majorChord = new Harmony(new int[]{0, 6, 11, 19}, "Dur", "major", "Maggiore" );
     public static final Harmony minorChord = new Harmony(new int[]{0, 5, 11, 19}, "Moll", "minor", "Minore");
+    // public static final Harmony[] allHarmonies = new Harmony(){majorChord, minorChord};
 
 }

@@ -32,6 +32,8 @@ public class Main {
             }
             htmlGenerator.generateIndexPage();
             htmlGenerator.generateCompleteList();
+            htmlGenerator.generateDSGVO();
+            htmlGenerator.generateAboutPage();
         }
 
 
