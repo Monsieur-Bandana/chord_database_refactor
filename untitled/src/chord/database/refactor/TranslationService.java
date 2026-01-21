@@ -22,9 +22,15 @@ public class TranslationService {
         about.put("english", "About");
         about.put("roman", "Su di Me");
 
+        Map<String, String> instruction = new HashMap<>();
+        instruction.put("german", "Berühre eine Taste, um alle Dur- und Moll Akkorde zu erhalten, in denen der Ton vorkommt");
+        instruction.put("english", "Touch a key to get all major and minor chords in which that note occurs.");
+        instruction.put("roman", "Tocca un tasto per ottenere tutti gli accordi maggiori e minori in cui compare quella nota");
+
         TRANSLATIONS.put("selector", selector);
         TRANSLATIONS.put("overview", overview);
         TRANSLATIONS.put("about", about);
+        TRANSLATIONS.put("instruction", instruction);
     }
 
     public static String getTranslation(String codewort, String sprache) {

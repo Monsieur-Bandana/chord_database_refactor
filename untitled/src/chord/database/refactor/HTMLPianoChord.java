@@ -53,23 +53,12 @@ public class HTMLPianoChord {
         htmlString = htmlString.replace("$audiofilename$", chord.baseTone.toUpperCase()+"-"+chord.harmonyH.german);
         htmlString = htmlString.replace("$language$", server);
 
-        Pattern pattern = Pattern.compile("\\$(\\d+)\\$");
-        Matcher matcher = pattern.matcher(htmlString);
-
-        StringBuffer result = new StringBuffer();
-
-        while (matcher.find()) {
-            int key = Integer.parseInt(matcher.group(1));
-            matcher.appendReplacement(result, ladder[key]);
-        }
-
-        matcher.appendTail(result);
-        htmlString = result.toString();
+        htmlString = TemplateHelper.replaceInts(htmlString, ladder);
 
 
         Pattern COLORING_PATTERN = Pattern.compile("\\$coloring\\(([^:]+):([^)]+)\\)\\$");
 
-        matcher = COLORING_PATTERN.matcher(htmlString);
+        Matcher matcher = COLORING_PATTERN.matcher(htmlString);
 
         while (matcher.find()) {
             int key = Integer.parseInt(matcher.group(1));

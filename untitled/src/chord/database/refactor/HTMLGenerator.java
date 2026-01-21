@@ -100,6 +100,9 @@ public class HTMLGenerator {
 
         htmlString = htmlString.replace("$keyset$", htmlPiano);
         htmlString = htmlString.replace("$header$",  this.generateHeader());
+        htmlString = htmlString.replace("$server$",  languageHelper.getServer());
+        htmlString = TemplateHelper.replaceInts(htmlString, ladder);
+        htmlString = htmlString.replace("$instruction$",  languageHelper.getTranslation("instruction"));
 
         Path dest = Path.of(server, "index.html");
         // Zielordner anlegen (falls nicht vorhanden)
