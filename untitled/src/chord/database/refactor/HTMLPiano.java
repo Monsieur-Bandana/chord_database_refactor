@@ -10,9 +10,10 @@ public class HTMLPiano {
     private String[] ladder;
     private LanguageHelper languageHelper;
     private String server;
+    private String language;
 
     public HTMLPiano(String language, String[] ladder) throws Exception {
-
+        this.language = language;
         this.languageHelper = new LanguageHelper(language);
         this.ladder = ladder;
         this.server = languageHelper.getServer();
@@ -77,6 +78,11 @@ public class HTMLPiano {
         htmlString = htmlString.replace("$parallel$", chord.parallelChord);
         htmlString = htmlString.replace("$parallelname$", chord.parallelHarmony);
         htmlString = htmlString.replace("$parallelharmony$", languageHelper.getTranslation("parallelharmony"));
+        String subserver = "";
+        if(!language.equals("german")){
+            subserver = "/" + language;
+        }
+        htmlString = htmlString.replace("$server$", subserver);
         htmlString = htmlString.replace("$audiofilename$", RuleSet.germanNames[chord.numericTones[0]].toUpperCase()+"-"+chord.harmonyH.german);
         return htmlString;
     }
