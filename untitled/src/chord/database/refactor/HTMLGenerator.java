@@ -33,10 +33,12 @@ public class HTMLGenerator {
         return htmlString;
     }
 
+
     private String generatePianos(List<Chord> chords) throws Exception {
+        String[] ladder = languageHelper.getLongLadder();
         String pianoSection = "";
         for(Chord chord : chords){
-            pianoSection += new HTMLPiano(chord, language).generatePage();
+            pianoSection += new HTMLPianoChord(chord, language, ladder).generatePage();
         }
         return pianoSection;
     }
@@ -81,6 +83,25 @@ public class HTMLGenerator {
         htmlString = htmlString.replace("$pianoElements$", this.generatePianos(allChords));
         htmlString = htmlString.replace("$header$", this.generateHeader());
 
+        // Zielordner anlegen (falls nicht vorhanden)
+        Files.createDirectories(dest.getParent());
+
+        // Datei schreiben
+        Files.writeString(dest, htmlString);
+    }
+
+
+    public void generateIndexPage() throws Exception {
+        String htmlString = TemplateHelper.extractString("template-index");
+        String[] ladder = languageHelper.getBasicLadder();
+
+
+        String htmlPiano = new HTMLPiano(language, ladder).buildPiano();
+
+        htmlString = htmlString.replace("$keyset$", htmlPiano);
+        htmlString = htmlString.replace("$header$",  this.generateHeader());
+
+        Path dest = Path.of(server, "index.html");
         // Zielordner anlegen (falls nicht vorhanden)
         Files.createDirectories(dest.getParent());
 

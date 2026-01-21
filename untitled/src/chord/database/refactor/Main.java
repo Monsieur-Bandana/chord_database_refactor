@@ -30,7 +30,7 @@ public class Main {
                 System.out.printf(" " + baseTone +" ");
                 htmlGenerator.generateSinglePage(baseTone);
             }
-
+            htmlGenerator.generateIndexPage();
             htmlGenerator.generateCompleteList();
         }
 

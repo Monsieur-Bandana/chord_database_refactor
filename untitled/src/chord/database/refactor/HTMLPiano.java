@@ -1,72 +1,56 @@
 package chord.database.refactor;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class HTMLPiano {
-    private final Path templatePiano;
-    private Chord chord;
+
+
+
     private String[] ladder;
     private LanguageHelper languageHelper;
+    private String server;
 
-    public HTMLPiano(Chord chord, String language) throws Exception {
-        this.chord = chord;
-        this.templatePiano = Path.of("server/templates/template-piano.html");
+    public HTMLPiano(String language, String[] ladder) throws Exception {
+
         this.languageHelper = new LanguageHelper(language);
-        this.ladder = languageHelper.getLongLadder();
+        this.ladder = ladder;
+        this.server = languageHelper.getServer();
     }
 
-    public String generatePage() throws IOException {
-        String server = languageHelper.getServer();
-
-        // Template lesen
-        String htmlString = Files.readString(templatePiano);
-
-        // Platzhalter ersetzen
-        htmlString = htmlString.replace("$chordname$", chord.chordname);
-        htmlString = htmlString.replace("$audiofilename$", chord.baseTone.toUpperCase()+"-"+chord.harmonyH.german);
-        htmlString = htmlString.replace("$language$", server);
-
-        Pattern pattern = Pattern.compile("\\$(\\d+)\\$");
-        Matcher matcher = pattern.matcher(htmlString);
-
-        StringBuffer result = new StringBuffer();
-
-        while (matcher.find()) {
-            int key = Integer.parseInt(matcher.group(1));
-            matcher.appendReplacement(result, ladder[key]);
-        }
-
-        matcher.appendTail(result);
-        htmlString = result.toString();
-
-
-        Pattern COLORING_PATTERN = Pattern.compile("\\$coloring\\(([^:]+):([^)]+)\\)\\$");
-
-        matcher = COLORING_PATTERN.matcher(htmlString);
-
-        while (matcher.find()) {
-            int key = Integer.parseInt(matcher.group(1));
-
-            String value = matcher.group(2);
-            String color = value;
-            for (int tone : chord.numericTones) {
-                if (tone == key) {
-                    color = value + " red";
-                    break;
-                }
-            }
-
-            htmlString = htmlString.replace("$coloring("+key+":"+value+")$", color);
-
-        }
-
+    private String generatKey(String name, String color) throws IOException {
+        String htmlString = TemplateHelper.extractString("template-piano-key");
+        htmlString = htmlString.replace("$note$", name);
+        htmlString = htmlString.replace("$notelink$", server + name);
+        htmlString = htmlString.replace("$color$", color);
         return htmlString;
+    }
 
+    public String buildPiano() throws IOException {
+
+        String pianoString = "";
+        for (int i =0; i < ladder.length; i++){
+            String color = "black";
+            int finalI = i;
+            if(Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n == finalI)){
+                continue;
+            }
+            int helper = i;
+            if(helper >= 8){
+                helper-=8;
+            }
+            if(helper % 3 == 0){
+                color = "white";
+            }
+            pianoString += this.generatKey(ladder[i], color);
+        }
+
+        return pianoString;
     }
 }
