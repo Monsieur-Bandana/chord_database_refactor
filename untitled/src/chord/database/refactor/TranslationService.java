@@ -67,6 +67,24 @@ public class TranslationService {
         chordswith.put("english", "Chords with");
         chordswith.put("roman", "Accordi con");
 
+        Map<String, String> sheetview = new HashMap<>();
+        sheetview.put("german", "Notenansicht");
+        sheetview.put("english", "Sheet Music View");
+        sheetview.put("roman", "Vista dello Spartito");
+
+        Map<String, String> pianoview = new HashMap<>();
+        pianoview.put("german", "Klaviaturansicht");
+        pianoview.put("english", "Keyboard View");
+        pianoview.put("roman", "Vista della Tastiera");
+
+        Map<String, String> parallelharmony = new HashMap<>();
+        parallelharmony.put("german", "Paralleltonart");
+        parallelharmony.put("english", "Relative Key");
+        parallelharmony.put("roman", "Tonalità Relativa");
+
+        TRANSLATIONS.put("parallelharmony", parallelharmony);
+        TRANSLATIONS.put("sheetview", sheetview);
+        TRANSLATIONS.put("pianoview", pianoview);
         TRANSLATIONS.put("title", title);
         TRANSLATIONS.put("todatabase", todatabase);
         TRANSLATIONS.put("target", target);

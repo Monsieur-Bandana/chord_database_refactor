@@ -13,8 +13,10 @@ public class Chord {
     public String chordname;
     public int[] numericTones;
     public Harmony harmonyH;
+    public String parallelChord;
+    public String parallelHarmony;
 
-    public Chord(String baseTone, String scdTone, String thirdTone, String highPitchBaseTone, String harmony, int[] numericTones, Harmony harmonyH) {
+    public Chord(String baseTone, String scdTone, String thirdTone, String highPitchBaseTone, String harmony, int[] numericTones, Harmony harmonyH, String parallelChord, String parallelHarmony) {
         this.baseTone = baseTone;
         this.scdTone = scdTone;
         this.thirdTone = thirdTone;
@@ -22,6 +24,8 @@ public class Chord {
         this.harmony = harmony;
         this.numericTones = numericTones;
         this.harmonyH = harmonyH;
+        this.parallelChord = parallelChord;
+        this.parallelHarmony = parallelHarmony;
 
         tones = new String[]{this.baseTone, this.scdTone, this.thirdTone, this.highPitchBaseTone};
         chordname = baseTone.toUpperCase() + "-" + harmony;

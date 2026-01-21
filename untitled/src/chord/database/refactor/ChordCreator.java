@@ -3,6 +3,7 @@ package chord.database.refactor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 public class ChordCreator {
@@ -31,29 +32,51 @@ public class ChordCreator {
         return n;
     }
 
+    private String findParallel(int position) throws Exception {
+
+        if(chordType.equals("major")){
+            if(position <= 5){
+                position+=19;
+            }
+
+            position -= 5;
+        }else if(chordType.equals("minor")){
+
+
+            position += 6;
+        }
+        // gewünschtes format "/cis/#cis-moll"
+        return ladder[position];
+    }
+
     public Chord getChord() throws Exception {
         Harmony harmony;
-
+        String parallelH = "";
         int[] mChords = {};
         switch (chordType){
             case "major":
                 harmony = RuleSet.majorChord;
+                parallelH = languageHelper.getChordName(RuleSet.minorChord);
                 break;
             case "minor":
                 harmony = RuleSet.minorChord;
+                parallelH = languageHelper.getChordName(RuleSet.majorChord);
                 break;
             default:
                 throw new Exception("Unbekannter chordType: " + chordType);
         }
         String chordname = languageHelper.getChordName(harmony);
-
+        String parallelTone = "";
         mChords = harmony.chord;
         int additioner = 0;
         for (int i = 0; i < ladder.length; i++) {
             if(ladder[i].equals(startingTone)){
                 additioner = i;
+                parallelTone = findParallel(i);
                 break;
             }
+
+
 
         }
         List<String> retChord = new ArrayList<>();
@@ -67,6 +90,6 @@ public class ChordCreator {
             retChord.add(ladder[ladder_pos]);
         }
 
-        return new Chord(retChord.get(0), retChord.get(1), retChord.get(2), retChord.get(3), chordname, intChords, harmony);
+        return new Chord(retChord.get(0), retChord.get(1), retChord.get(2), retChord.get(3), chordname, intChords, harmony, parallelTone, parallelH);
     }
 }

@@ -74,6 +74,10 @@ public class HTMLPiano {
         }
         htmlString = htmlString.replace("$pianokeys$", pianoString);
         htmlString = htmlString.replace("$chordname$", chord.chordname);
+        htmlString = htmlString.replace("$parallel$", chord.parallelChord);
+        htmlString = htmlString.replace("$parallelname$", chord.parallelHarmony);
+        htmlString = htmlString.replace("$parallelharmony$", languageHelper.getTranslation("parallelharmony"));
+        htmlString = htmlString.replace("$audiofilename$", RuleSet.germanNames[chord.numericTones[0]].toUpperCase()+"-"+chord.harmonyH.german);
         return htmlString;
     }
 }

@@ -121,7 +121,7 @@ public class HTMLGenerator {
         htmlString = htmlString.replace("$server$",  languageHelper.getServer());
         htmlString = TemplateHelper.replaceInts(htmlString, ladder);
 
-        String[] textKeys = {"instruction", "welcome", "title", "todatabase", "target", "explanation"};
+        String[] textKeys = {"instruction", "welcome", "title", "todatabase", "target", "explanation", "sheetview", "pianoview"};
         htmlString = translateMultipleKeys(htmlString, textKeys);
 
         Path dest = Path.of(server, "index.html");

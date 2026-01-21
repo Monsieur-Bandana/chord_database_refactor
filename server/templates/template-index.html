@@ -22,7 +22,7 @@
       <link rel="stylesheet" href="/css/musicsheet.css" />
 
       <div class="pianoheader">
-        <p id="mode">Notenansicht</p>
+        <p id="mode">$sheetview$</p>
         <label class="switch">
           <input type="checkbox" id="checkbox" onclick="modeSwitch()" />
           <span class="slider round"></span>
@@ -218,28 +218,30 @@
           if (checkBox.checked == true) {
             noten.style.display = "block";
             piano.style.display = "none";
-            document.getElementById("mode").innerHTML = "Klaviaturansicht";
+            document.getElementById("mode").innerHTML = "$pianoview$";
             document.getElementById("alternativtext").innerHTML = "Note";
           } else {
             piano.style.display = "block";
             noten.style.display = "none";
-            document.getElementById("mode").innerHTML = "Notenansicht";
+            document.getElementById("mode").innerHTML = "$sheetview$";
             document.getElementById("alternativtext").innerHTML = "Taste";
           }
         }
       </script>
       <h1 id="slogan">$instruction$</h1>
-      <div style="margin-top: 11.5rem">
-        <h2>Features, die in Zukunft folgen:</h2>
-        <li>Notennotation und Gitarrenriffs</li>
-        <li>Sext-, Sept-, Non- und Neapolitanische Akkorde</li>
-        <li>
-          Ergänzung der Klaviaturen um Paralleltonarten, Dominanten,
-          Subdominanten sowie Popakkorde
-        </li>
-        <li>Begriffserklärungen</li>
-        <li>und natürlich ein besserer Look</li>
-      </div>
+      <!--
+        <div style="margin-top: 11.5rem">
+          <h2>Features, die in Zukunft folgen:</h2>
+          <li>Notennotation und Gitarrenriffs</li>
+          <li>Sext-, Sept-, Non- und Neapolitanische Akkorde</li>
+          <li>
+            Ergänzung der Klaviaturen um Paralleltonarten, Dominanten,
+            Subdominanten sowie Popakkorde
+          </li>
+          <li>Begriffserklärungen</li>
+          <li>und natürlich ein besserer Look</li>
+        </div>
+        -->
     </main>
 
     <footer>$footer$</footer>
