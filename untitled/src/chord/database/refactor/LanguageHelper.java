@@ -22,6 +22,9 @@ public class LanguageHelper {
             case "roman":
                 ladderhelper = RuleSet.romanNames;
                 break;
+            case "indonesia":
+                ladderhelper = RuleSet.indonesianNames;
+                break;
             default:
                 throw new Exception("Unbekannte Sprache: " + language);
         }
@@ -48,6 +51,9 @@ public class LanguageHelper {
                 break;
             case "roman":
                 chordname = harmony.roman;
+                break;
+            case "indonesia":
+                chordname = harmony.indonesian;
                 break;
             default:
                 throw new Exception("Unbekannte Sproch: " + language);

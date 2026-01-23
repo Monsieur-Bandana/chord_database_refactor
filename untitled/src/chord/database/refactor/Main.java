@@ -18,7 +18,7 @@ public class Main {
         }
         */
 
-        String[] langList = new String[]{"german", "roman", "english"};
+        String[] langList = new String[]{"german", "roman", "english", "indonesia"};
 
         for(int y = 0; y < langList.length; y++){
             List<Chord> test = new ChordListCreator(langList[y]).generateChords();

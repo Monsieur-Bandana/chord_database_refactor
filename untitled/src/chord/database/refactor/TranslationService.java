@@ -11,76 +11,92 @@ public class TranslationService {
         selector.put("german", "Notenauswahl");
         selector.put("english", "Note Selector");
         selector.put("roman", "Selettore di Note");
+        selector.put("indonesia", "Pemilih Nada");
 
         Map<String, String> overview = new HashMap<>();
         overview.put("german", "komplette Übersicht");
         overview.put("english", "Complete List");
         overview.put("roman", "Elenco Completo");
+        overview.put("indonesia", "Daftar Lengkap");
 
         Map<String, String> about = new HashMap<>();
         about.put("german", "Über mich");
         about.put("english", "About");
         about.put("roman", "Su di Me");
+        about.put("indonesia", "Tentang Saya");
 
         Map<String, String> instruction = new HashMap<>();
         instruction.put("german", "Berühre eine Taste, um alle Dur- und Moll Akkorde zu erhalten, in denen der Ton vorkommt");
         instruction.put("english", "Touch a key to get all major and minor chords in which that note occurs.");
         instruction.put("roman", "Tocca un tasto per ottenere tutti gli accordi maggiori e minori in cui compare quella nota");
+        instruction.put("indonesia", "Sentuh sebuah tuts untuk mendapatkan semua akor mayor dan minor yang mengandung nada tersebut.");
 
         Map<String, String> welcome = new HashMap<>();
         welcome.put("german", "Herzlich Willkommen");
         welcome.put("english", "Welcome");
         welcome.put("roman", "Benvenuto");
+        welcome.put("indonesia", "Selamat Datang");
 
         Map<String, String> title = new HashMap<>();
         title.put("german", "Akkord Datenbank");
         title.put("english", "Chord Database");
         title.put("roman", "Database degli Accordi");
+        title.put("indonesia", "Basis Data Akor");
 
         Map<String, String> todatabase = new HashMap<>();
         todatabase.put("german", "zur Akkord Datenbank.");
         todatabase.put("english", "to the chord database.");
         todatabase.put("roman", "alla database degli accordi.");
+        todatabase.put("indonesia", "ke basis data akor.");
 
         Map<String, String> target = new HashMap<>();
         target.put("german", "Diese Seite hat zum Ziel Komponisten, Produzenten oder Schülern zu helfen, die passende musikalische Begleitung für ihre Melodien zu finden.");
         target.put("english", "This page aims to help composers, producers, or students find the appropriate musical accompaniment for their melodies.");
         target.put("roman", "Questa pagina ha lo scopo di aiutare compositori, produttori o studenti a trovare l’accompagnamento musicale adatto alle loro melodie.");
+        target.put("indonesia", "Halaman ini bertujuan untuk membantu komposer, produser, atau pelajar menemukan iringan musik yang sesuai untuk melodi mereka.");
 
         Map<String, String> explanation = new HashMap<>();
         explanation.put("german", "Anders als andere Akkordübersichten, liefert diese Datenbank alle Akkorde, in denen der ausgewählte Ton vorkommt. So gibt die Akkordübersicht bei Eingabe des Tons \"C\" nicht nur die Akkorde c-moll oder C-Dur aus, sondern auch zum Beispiel a-moll.");
         explanation.put("english", "Unlike other chord overviews, this database provides all chords in which the selected note occurs. For example, when entering the note \"C\", it not only shows C minor or C major, but also chords such as A minor.");
         explanation.put("roman", "A differenza di altre panoramiche di accordi, questa banca dati fornisce tutti gli accordi in cui compare la nota selezionata. Inserendo la nota \"C\", ad esempio, non vengono mostrati solo Do maggiore o Do minore, ma anche accordi come La minore.");
+        explanation.put("indonesia", "Berbeda dengan daftar akor lainnya, basis data ini menampilkan semua akor yang mengandung nada yang dipilih. Misalnya, saat memasukkan nada \"C\", tidak hanya akor C mayor atau C minor yang ditampilkan, tetapi juga akor seperti A minor.");
 
         Map<String, String> othercords = new HashMap<>();
         othercords.put("german", "Andere Akkorde mit");
         othercords.put("english", "Other chords with");
         othercords.put("roman", "Altri accordi con");
+        othercords.put("indonesia", "Akor lain dengan");
 
         Map<String, String> asbase = new HashMap<>();
         asbase.put("german", "als Grundton");
         asbase.put("english", "as root note");
         asbase.put("roman", "come nota fondamentale");
+        asbase.put("indonesia", "sebagai nada dasar");
 
         Map<String, String> chordswith = new HashMap<>();
         chordswith.put("german", "Akkorde mit");
         chordswith.put("english", "Chords with");
         chordswith.put("roman", "Accordi con");
+        chordswith.put("indonesia", "Akor dengan");
 
         Map<String, String> sheetview = new HashMap<>();
         sheetview.put("german", "Notenansicht");
         sheetview.put("english", "Sheet Music View");
         sheetview.put("roman", "Vista dello Spartito");
+        sheetview.put("indonesia", "Tampilan Notasi");
 
         Map<String, String> pianoview = new HashMap<>();
         pianoview.put("german", "Klaviaturansicht");
         pianoview.put("english", "Keyboard View");
         pianoview.put("roman", "Vista della Tastiera");
+        pianoview.put("indonesia", "Tampilan Papan Tuts");
 
         Map<String, String> parallelharmony = new HashMap<>();
         parallelharmony.put("german", "Paralleltonart");
         parallelharmony.put("english", "Relative Key");
         parallelharmony.put("roman", "Tonalità Relativa");
+        parallelharmony.put("indonesia", "Tangga Nada Relatif");
+
 
         TRANSLATIONS.put("parallelharmony", parallelharmony);
         TRANSLATIONS.put("sheetview", sheetview);

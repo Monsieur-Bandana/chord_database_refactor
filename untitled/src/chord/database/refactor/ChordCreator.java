@@ -8,12 +8,12 @@ import java.util.stream.Stream;
 
 public class ChordCreator {
     private String startingTone;
-    private String chordType;
+    private Harmony chordType;
     private String[] ladder;
     private String language;
     private LanguageHelper languageHelper;
 
-    public ChordCreator(String startingTone, String chordType, String language) throws Exception {
+    public ChordCreator(String startingTone, Harmony chordType, String language) throws Exception {
         this.startingTone = startingTone;
         this.chordType = chordType;
         this.language = language;
@@ -33,7 +33,7 @@ public class ChordCreator {
     }
 
     private String findParallel(int position) throws Exception {
-
+        String parallel = "";
         if(chordType.equals("major")){
             if(position <= 5){
                 position+=19;
@@ -46,24 +46,26 @@ public class ChordCreator {
             position += 6;
         }
         // gewünschtes format "/cis/#cis-moll"
-        return ladder[position];
+        parallel = ladder[position];
+
+        int finalPosition = position;
+        if(Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n == finalPosition)){
+            System.out.println("Found fake note: " + RuleSet.germanNames[position]);
+            parallel = "";
+        }
+
+        return parallel;
     }
 
     public Chord getChord() throws Exception {
-        Harmony harmony;
+        Harmony harmony = chordType;
         String parallelH = "";
         int[] mChords = {};
-        switch (chordType){
-            case "major":
-                harmony = RuleSet.majorChord;
-                parallelH = languageHelper.getChordName(RuleSet.minorChord);
-                break;
-            case "minor":
-                harmony = RuleSet.minorChord;
-                parallelH = languageHelper.getChordName(RuleSet.majorChord);
-                break;
-            default:
-                throw new Exception("Unbekannter chordType: " + chordType);
+
+        if(harmony.equals(RuleSet.majorChord)){
+            parallelH = languageHelper.getChordName(RuleSet.minorChord);
+        }else if(harmony.equals(RuleSet.minorChord)){
+            parallelH = languageHelper.getChordName(RuleSet.majorChord);
         }
         String chordname = languageHelper.getChordName(harmony);
         String parallelTone = "";

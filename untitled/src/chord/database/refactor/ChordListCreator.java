@@ -45,14 +45,14 @@ public class ChordListCreator {
             if(forbiddenTones.contains(ladder[i])){
                 continue;
             };
-            Chord mjaorChord = new ChordCreator(ladder[i], "major", languageSetting).getChord();
-            Chord minorChord = new ChordCreator(ladder[i], "minor", languageSetting).getChord();
-            if (isValid(mjaorChord)) {
-                retList.add(mjaorChord);
+
+            for (Harmony h : RuleSet.allHarmonies){
+                Chord chord = new ChordCreator(ladder[i], h, languageSetting).getChord();
+                if (isValid(chord)) {
+                    retList.add(chord);
+                }
             }
-            if (isValid(minorChord)) {
-                retList.add(minorChord);
-            }
+
         }
         return retList;
     }

@@ -12,7 +12,7 @@ public class HTMLPiano {
     private String server;
     private String language;
 
-    public HTMLPiano(String language, String[] ladder) throws Exception {
+    public HTMLPiano(String language, String[] ladder) {
         this.language = language;
         this.languageHelper = new LanguageHelper(language);
         this.ladder = ladder;
@@ -33,9 +33,7 @@ public class HTMLPiano {
         for (int i =0; i < ladder.length; i++){
             String color = "black";
             int finalI = i;
-            if(Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n == finalI)){
-                continue;
-            }
+            if(Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n == finalI)) continue;
             int helper = i;
             if(helper >= 8){
                 helper-=8;
@@ -49,12 +47,25 @@ public class HTMLPiano {
         return pianoString;
     }
 
+    private String addParallelChord(Chord chord) throws IOException {
+        if(chord.parallelChord.isEmpty()){
+            return "";
+        }
+        String htmlString = TemplateHelper.extractString("template-parallel");
+        htmlString = htmlString.replace("$parallel$", chord.parallelChord);
+        htmlString = htmlString.replace("$parallelname$", chord.parallelHarmony);
+        htmlString = htmlString.replace("$parallelharmony$", languageHelper.getTranslation("parallelharmony"));
+        return htmlString;
+    }
+
     public String buildChordPiano(Chord chord) throws IOException {
         String htmlString = TemplateHelper.extractString("template-piano");
         String pianoString = "";
         for (int i =0; i < ladder.length; i++){
             String color = "black";
             int finalI = i;
+            //int[] x = chord.database.refactor.RuleSet.fakeNotes;
+
             if(Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n == finalI) || Arrays.stream(RuleSet.fakeNotes).anyMatch(n -> n + 19 == finalI) ){
                 continue;
             }
@@ -75,9 +86,7 @@ public class HTMLPiano {
         }
         htmlString = htmlString.replace("$pianokeys$", pianoString);
         htmlString = htmlString.replace("$chordname$", chord.chordname);
-        htmlString = htmlString.replace("$parallel$", chord.parallelChord);
-        htmlString = htmlString.replace("$parallelname$", chord.parallelHarmony);
-        htmlString = htmlString.replace("$parallelharmony$", languageHelper.getTranslation("parallelharmony"));
+        htmlString = htmlString.replace("$parallelssection$", addParallelChord(chord));
         String subserver = "";
         if(!language.equals("german")){
             subserver = "/" + language;
