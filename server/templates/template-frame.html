@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/css/style.css" />
-    <title>$chordswith$ $basetone$</title>
+    <link rel="alternate" hreflang="de" href="/" />
+    <link rel="alternate" hreflang="it" href="/roman/" />
+    <link rel="alternate" hreflang="id" href="/indonesia/" />
+    <link rel="alternate" hreflang="en" href="/english/" />
+    <link rel="alternate" hreflang="x-default" href="/english/" />
+    <title>$title$</title>
   </head>
 
   <body>
@@ -11,27 +16,8 @@
 
     <div id="circle"></div>
 
-    <main>
-      <div class="jumppoints">
-        <p><span class="uppercase">$basetone$</span> $asbase$:</p>
-        <div class="jInner">$jumperElementsChord$</div>
+    $pagecontent$
 
-        <p>
-         $othercords$
-          <span class="uppercase">$basetone$</span>:
-        </p>
-        <div class="jInner">$jumperElementsRelated$</div>
-      </div>
-      <h2><span class="uppercase">$basetone$</span> $asbase$:</h2>
-      $pianoElementsBasetone$
-      <h2 id="newSection">
-        $othercords$ <span class="uppercase">$basetone$</span>:
-      </h2>
-      $pianoElementsRelated$
-      
-
-    <footer>
-      $footer$
-    </footer>
+    <footer>$footer$</footer>
   </body>
 </html>

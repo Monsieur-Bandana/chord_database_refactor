@@ -51,6 +51,14 @@ public class HTMLGenerator {
         return menuSection;
     }
 
+    private String putFrame(String content, String title) throws IOException {
+        String htmlString = TemplateHelper.extractString("template-frame");
+        htmlString = hTMLDecorator(htmlString);
+        htmlString = htmlString.replace("$pagecontent$", content);
+        htmlString = htmlString.replace("$title$", title);
+        return htmlString;
+    }
+
     public String generateText(String htmlString, String key){
         htmlString = htmlString.replace("$"+key+"$", languageHelper.getTranslation(key));
         return htmlString;
@@ -65,7 +73,7 @@ public class HTMLGenerator {
     }
 
     public void generateSinglePage(String baseTone) throws Exception {
-        Path templateFrame = Path.of("server/templates/template-frame.html");
+        Path templateFrame = Path.of("server/templates/template-frame-single.html");
         Path destPath = Path.of(server, baseTone, "index.html");
         SpecificChordList chordlist = new SpecificChordList(baseTone, allChords);
         List<Chord> mainChords = chordlist.getBaseToneList();
@@ -74,7 +82,7 @@ public class HTMLGenerator {
         String htmlString = Files.readString(templateFrame);
 
         // Platzhalter ersetzen
-        htmlString = HTMLDecorator(htmlString);
+        htmlString = hTMLDecorator(htmlString);
         htmlString = htmlString.replace("$basetone$", baseTone);
         htmlString = htmlString.replace("$pianoElementsBasetone$", this.generatePianos(mainChords));
         htmlString = htmlString.replace("$pianoElementsRelated$", this.generatePianos(relatedChords));
@@ -83,6 +91,8 @@ public class HTMLGenerator {
 
         String[] textKeys = {"chordswith", "asbase", "othercords"};
         htmlString = translateMultipleKeys(htmlString, textKeys);
+
+        htmlString = putFrame(htmlString, languageHelper.getTranslation("chordswith")+ " " + baseTone);
 
 
         // Zielordner anlegen (falls nicht vorhanden)
@@ -98,7 +108,9 @@ public class HTMLGenerator {
         String htmlString = Files.readString(completedtemplate);
         htmlString = htmlString.replace("$jumperElements$", this.generateMenu(allChords));
         htmlString = htmlString.replace("$pianoElements$", this.generatePianos(allChords));
-        htmlString = HTMLDecorator(htmlString);
+        htmlString = hTMLDecorator(htmlString);
+
+        htmlString = putFrame(htmlString,  languageHelper.getTranslation("overview"));
 
         Path dest = Path.of(server, "completelist","index.html");
         // Zielordner anlegen (falls nicht vorhanden)
@@ -117,12 +129,14 @@ public class HTMLGenerator {
         String htmlPiano = new HTMLPiano(language, ladder).buildPiano();
 
         htmlString = htmlString.replace("$keyset$", htmlPiano);
-        htmlString = HTMLDecorator(htmlString);
+
         htmlString = htmlString.replace("$server$",  languageHelper.getServer());
         htmlString = TemplateHelper.replaceInts(htmlString, ladder);
 
         String[] textKeys = {"instruction", "welcome", "title", "todatabase", "target", "explanation", "sheetview", "pianoview"};
         htmlString = translateMultipleKeys(htmlString, textKeys);
+
+        htmlString = putFrame(htmlString, languageHelper.getTranslation("title"));
 
         Path dest = Path.of(server, "index.html");
         // Zielordner anlegen (falls nicht vorhanden)
@@ -134,7 +148,7 @@ public class HTMLGenerator {
 
     public void generateAboutPage() throws Exception{
         String htmlString = TemplateHelper.extractString("template-about");
-        htmlString = HTMLDecorator(htmlString);
+        htmlString = putFrame(htmlString, languageHelper.getTranslation("about"));
 
         Path dest = Path.of(server, "aboutme","index.html");
         // Zielordner anlegen (falls nicht vorhanden)
@@ -146,7 +160,7 @@ public class HTMLGenerator {
 
     public void generateDSGVO() throws Exception{
         String htmlString = TemplateHelper.extractString("template-dsgvo");
-        htmlString = HTMLDecorator(htmlString);
+        htmlString = putFrame(htmlString, "DSGVO");
 
         Path dest = Path.of(server, "dsgvo","index.html");
         // Zielordner anlegen (falls nicht vorhanden)
@@ -161,7 +175,7 @@ public class HTMLGenerator {
 
     }
 
-    public String HTMLDecorator(String htmlString) throws IOException {
+    public String hTMLDecorator(String htmlString) throws IOException {
         htmlString = htmlString.replace("$header$",  this.generateHeader());
         htmlString = htmlString.replace("$header$",  this.generateHeader());
         htmlString = htmlString.replace("$footer$", this.generateFooter());
