@@ -35,9 +35,79 @@ public final class RuleSet {
     };
 
     public static final int[] fakeNotes = {7, 18};
-    public static final Harmony majorChord    = new Harmony(new int[]{0, 6, 11, 19}, "Dur",  "major", "Maggiore", "mayor");
-    public static final Harmony minorChord    = new Harmony(new int[]{0, 5, 11, 19}, "Moll", "minor", "Minore",   "minor");
-    public static final Harmony dominantSept  = new Harmony(new int[]{0, 6, 11, 16}, "7",    "7",     "7",        "7");
+    // Grundakkorde
+    public static final Harmony majorChord = new Harmony(
+            new int[]{0, 6, 11, 19},
+            "Dur", "major", "Maggiore", "mayor",
+            "Dur", "maj", "mag", "maj"
+    );
+
+    public static final Harmony minorChord = new Harmony(
+            new int[]{0, 5, 11, 19},
+            "Moll", "minor", "Minore", "minor",
+            "Moll", "min", "min", "min"
+    );
+
+    public static final Harmony dominantSept = new Harmony(
+            new int[]{0, 6, 11, 16},
+            "Dominantseptakkord", "dominant seventh", "settima di dominante", "septim dominan",
+            "7", "7", "7", "7"
+    );
+
+
+    // Triads
+    public static final Harmony diminishedChord = new Harmony(
+            new int[]{0, 5, 10, 19},
+            "Verminderter Dreiklang", "diminished triad", "triade diminuita", "akor berkurang",
+            "dim", "dim", "dim", "dim"
+    );
+
+    public static final Harmony augmentedChord = new Harmony(
+            new int[]{0, 6, 12, 19},
+            "Übermäßiger Dreiklang", "augmented triad", "triade aumentata", "akor bertambah",
+            "aug", "aug", "aug", "aug"
+    );
+
+
+    // 7th chords
+    public static final Harmony majorSept = new Harmony(
+            new int[]{0, 6, 11, 17},
+            "Dur-Großseptakkord", "major seventh", "settima maggiore", "mayor tujuh",
+            "maj7", "maj7", "maj7", "maj7"
+    );
+
+    public static final Harmony minorSept = new Harmony(
+            new int[]{0, 5, 11, 16},
+            "Mollseptakkord", "minor seventh", "settima minore", "minor tujuh",
+            "m7", "m7", "m7", "m7"
+    );
+
+    public static final Harmony halfDiminished7 = new Harmony(
+            new int[]{0, 5, 10, 16},
+            "Halbverminderter Septakkord", "half-diminished seventh", "settima semidiminuita", "septim setengah berkurang",
+            "ø7", "m7b5", "ø7", "m7b5"
+    );
+
+    public static final Harmony diminished7 = new Harmony(
+            new int[]{0, 5, 10, 15},
+            "Verminderter Septakkord", "diminished seventh", "settima diminuita", "septim berkurang",
+            "dim7", "dim7", "dim7", "dim7"
+    );
+
+
+    // Suspended
+    public static final Harmony sus2Chord = new Harmony(
+            new int[]{0, 3, 11, 19},
+            "Sus2-Akkord", "suspended second", "accordo sospeso di seconda", "akor sus2",
+            "sus2", "sus2", "sus2", "sus2"
+    );
+
+    public static final Harmony sus4Chord = new Harmony(
+            new int[]{0, 8, 11, 19},
+            "Sus4-Akkord", "suspended fourth", "accordo sospeso di quarta", "akor sus4",
+            "sus4", "sus4", "sus4", "sus4"
+    );
+    public static final Harmony[] allHarmonies = {majorChord, minorChord, dominantSept, majorSept, diminishedChord,augmentedChord, minorSept, halfDiminished7,diminished7,sus2Chord, sus4Chord};
 /*
     // Triads
     public static final Harmony diminishedChord  = new Harmony(new int[]{0, 5, 10, 19}, "Vermindert", "diminished", "Diminuito"); // 1-b3-b5
@@ -53,6 +123,6 @@ public final class RuleSet {
     public static final Harmony sus2Chord        = new Harmony(new int[]{0, 3, 11, 19}, "sus2", "sus2", "sus2"); // 1-2-5
     public static final Harmony sus4Chord        = new Harmony(new int[]{0, 8, 11, 19}, "sus4", "sus4", "sus4"); // 1-4-5
 */
-    public static final Harmony[] allHarmonies = {majorChord, minorChord, dominantSept};
+
 
 }

@@ -34,16 +34,18 @@ public class ChordCreator {
 
     private String findParallel(int position) throws Exception {
         String parallel = "";
-        if(chordType.equals("major")){
+        if(chordType.equals(RuleSet.majorChord)){
             if(position <= 5){
                 position+=19;
             }
 
             position -= 5;
-        }else if(chordType.equals("minor")){
+        }else if(chordType.equals(RuleSet.minorChord)){
 
 
             position += 6;
+        }else{
+            return parallel;
         }
         // gewünschtes format "/cis/#cis-moll"
         parallel = ladder[position];
@@ -92,6 +94,10 @@ public class ChordCreator {
             retChord.add(ladder[ladder_pos]);
         }
 
-        return new Chord(retChord.get(0), retChord.get(1), retChord.get(2), retChord.get(3), chordname, intChords, harmony, parallelTone, parallelH);
+        new SoundCreator(intChords).generateSound();
+
+        String shortname = retChord.get(0) + "-" + languageHelper.getChordNameShort(harmony);
+
+        return new Chord(retChord.get(0), retChord.get(1), retChord.get(2), retChord.get(3), chordname, intChords, harmony, parallelTone, parallelH, shortname);
     }
 }

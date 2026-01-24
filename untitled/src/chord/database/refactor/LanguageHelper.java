@@ -61,6 +61,27 @@ public class LanguageHelper {
         return chordname;
     }
 
+    public String getChordNameShort(Harmony harmony) throws Exception {
+        String chordname = "";
+        switch (language){
+            case "german":
+                chordname = harmony.shortGerman;
+                break;
+            case "english":
+                chordname = harmony.shortEnglish;
+                break;
+            case "roman":
+                chordname = harmony.shortItalian;
+                break;
+            case "indonesia":
+                chordname = harmony.shortIndonesian;
+                break;
+            default:
+                throw new Exception("Unbekannte Sproch: " + language);
+        }
+        return chordname;
+    }
+
     public String getServer(){
         String server = "";
         if(!language.equals("german")){

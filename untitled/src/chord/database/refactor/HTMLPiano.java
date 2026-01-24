@@ -2,6 +2,7 @@ package chord.database.refactor;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class HTMLPiano {
 
@@ -86,13 +87,17 @@ public class HTMLPiano {
         }
         htmlString = htmlString.replace("$pianokeys$", pianoString);
         htmlString = htmlString.replace("$chordname$", chord.chordname);
+        htmlString = htmlString.replace("$chordnameshort$", chord.shortName);
         htmlString = htmlString.replace("$parallelssection$", addParallelChord(chord));
         String subserver = "";
         if(!language.equals("german")){
             subserver = "/" + language;
         }
         htmlString = htmlString.replace("$server$", subserver);
-        htmlString = htmlString.replace("$audiofilename$", RuleSet.germanNames[chord.numericTones[0]].toUpperCase()+"-"+chord.harmonyH.german);
+        String audiofilename = Arrays.stream(chord.numericTones)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining("_"));;
+        htmlString = htmlString.replace("$audiofilename$", audiofilename);
         return htmlString;
     }
 }

@@ -17,7 +17,7 @@ public class HTMLMenu {
 
         String htmlString = Files.readString(templateFrame);
 
-        htmlString = htmlString.replace("$chordname$", chord.chordname);
+        htmlString = htmlString.replace("$chordname$", chord.shortName);
         return htmlString;
     }
 }

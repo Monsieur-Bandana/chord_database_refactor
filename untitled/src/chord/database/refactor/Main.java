@@ -20,6 +20,8 @@ public class Main {
 
         String[] langList = new String[]{"german", "roman", "english", "indonesia"};
 
+        new SoundCreator(new int[]{0, 6, 11, 19}).generateSound();
+
         for(int y = 0; y < langList.length; y++){
             List<Chord> test = new ChordListCreator(langList[y]).generateChords();
 

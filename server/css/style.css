@@ -6,6 +6,10 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap");
 
+:root {
+  color-scheme: light;
+}
+
 html {
   margin: 0px;
   height: 100%;
@@ -243,6 +247,8 @@ a:nth-child(33) .black {
   width: 15rem;
   position: fixed;
   right: 2rem;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
 .jumppoints a {
